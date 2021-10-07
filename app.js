@@ -45,20 +45,8 @@ for (let i = 0; i < dictionary.length; i++) {
 let randWord = Math.floor(Math.random() * validSeedWords.length);
 mainWord = validSeedWords[randWord];
 
-//################### TESTING #######################
-
-// mainWord = "glide";
-// validWords.length = 0;
-// validWords.push("gdl");
-
-//################### TESTING #######################
-mainWord = "argyll";
 //Splits the main word up into individual letters
 letterList = mainWord.split("");
-
-// for (entry of letterListDuplicates) {
-//   console.log(entry);
-// }
 
 //Loop though all the final /////ERROR HERE
 //To Hashmap to check for duplicate letters
@@ -75,15 +63,8 @@ function createHashmaps(wordToHash) {
   return tempMap;
 }
 
-// for (entry of createHashmaps(mainWord)) {
-//   console.log(entry);
-// }
-
-//Test
-
 //Refines the vaild words down by adding those which share all common letters
 //COMMON LETTER REFINE
-
 var correctLetterWords = new Array();
 //Loop to check and make sure words match
 var mainWordHashMap = createHashmaps(mainWord);
@@ -104,29 +85,14 @@ for (let i = 0; i < validWords.length; i++) {
     correctLetterWords.push(validWords[i]);
   }
 }
-alert("valid words length" + validWords.length);
-alert("valid correct letterwords length" + correctLetterWords.length);
-console.log(correctLetterWords);
-//Common Letter Refine print
-
-// for (let i = 0; i < correctLetterWords.length; i++) {
-//   console.log(correctLetterWords[i]);
-// }
-
-alert();
 
 //Need to refine further by checking number of times each letter comes up
 //REFINE LETTER FREQ
-//PUSH TO FINAL
 for (let i = 0; i < correctLetterWords.length; i++) {
   let testerWordHashMap = createHashmaps(correctLetterWords[i]);
   let validLetterCount = true;
-  console.log("Current word: " + correctLetterWords[i]);
   for (let j = 0; j < letterList.length; j++) {
     //check to make sure each letter is less than or equal to in number than that of the main word hashmap
-    console.log("working on letter: " + letterList[j]);
-    console.log("Main word: has letter?" + mainWordHashMap.get(letterList[j]));
-    console.log("Tester word as letter" + testerWordHashMap.get(letterList[j]));
     if (
       mainWordHashMap.get(letterList[j]) >=
         testerWordHashMap.get(letterList[j]) ||
@@ -134,7 +100,6 @@ for (let i = 0; i < correctLetterWords.length; i++) {
     ) {
       //Do noting
     } else {
-      console.log("=====ERROR=====");
       //Change boolean to false
       validLetterCount = false;
       break;
@@ -145,13 +110,7 @@ for (let i = 0; i < correctLetterWords.length; i++) {
   }
 }
 
-console.log("correct letter words: " + correctLetterWords.length);
-console.log("Final word list: " + finalWordList.length);
-alert();
 //Game Processing
-
-//finalWordList.push("cat");
-//finalWordList.push("fish");
 
 //Create array of blank letter lengths
 for (let i = 0; i < finalWordList.length; i++) {
@@ -162,7 +121,7 @@ for (let i = 0; i < finalWordList.length; i++) {
   wordsAndBlanks.push(blanks);
 }
 
-//sh0uffle time
+//shuffle time
 //function to shuffle sort array
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
@@ -187,15 +146,11 @@ shuffledWord =
   tempArray[5];
 
 //print out both the words and the blanks
-for (let i = 0; i < finalWordList.length; i++) {
-  //console.log(finalWordList[i]);
-}
-//console.log(finalWordList.length);
-//console.log(correctWordGuesses);
+for (let i = 0; i < finalWordList.length; i++) {}
+
 while (correctWordGuesses < finalWordList.length) {
   //Print out letter
-  console.log("Letters Avalable: " + shuffledWord); //broken
-  console.log(mainWord);
+  console.log("Letters Avalable: " + shuffledWord);
   //Print out blanks
   for (let i = 0; i < wordsAndBlanks.length; i++) {
     console.log(wordsAndBlanks[i]);
@@ -224,6 +179,7 @@ while (correctWordGuesses < finalWordList.length) {
 console.clear();
 
 //Ending text and results!
+console.log("The root word was: " + mainWord);
 if (correctWordGuesses == finalWordList.length) {
   console.log("Wow, you got all of them! You Win!");
 } else {
