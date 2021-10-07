@@ -52,11 +52,9 @@ mainWord = validSeedWords[randWord];
 // validWords.push("gdl");
 
 //################### TESTING #######################
-
+mainWord = "argyll";
 //Splits the main word up into individual letters
-for (let i = 0; i < wordLength; i++) {
-  letterList.push(mainWord.substring(i, i + 1));
-}
+letterList = mainWord.split("");
 
 // for (entry of letterListDuplicates) {
 //   console.log(entry);
@@ -77,34 +75,43 @@ function createHashmaps(wordToHash) {
   return tempMap;
 }
 
+// for (entry of createHashmaps(mainWord)) {
+//   console.log(entry);
+// }
+
+//Test
+
 //Refines the vaild words down by adding those which share all common letters
 //COMMON LETTER REFINE
+
 var correctLetterWords = new Array();
 //Loop to check and make sure words match
 var mainWordHashMap = createHashmaps(mainWord);
 //Test letters in each word agains main word hashmap
-let validLetters = true; //boolean to check for
+//boolean to check for
 for (let i = 0; i < validWords.length; i++) {
+  let validLetters = true;
   //loop through each letter
+
   let currWord = validWords[i];
   for (let j = 0; j < currWord.length; j++) {
-    if (mainWordHashMap.has(currWord[j])) {
-    } else {
+    if (!mainWordHashMap.has(currWord[j])) {
       validLetters = false;
-      console.log("does this run/");
       break;
     }
   }
-  if ((validLetters = true)) {
+  if (validLetters == true) {
     correctLetterWords.push(validWords[i]);
   }
 }
-
+alert("valid words length" + validWords.length);
+alert("valid correct letterwords length" + correctLetterWords.length);
+console.log(correctLetterWords);
 //Common Letter Refine print
 
-for (let i = 0; i < correctLetterWords.length; i++) {
-  console.log(correctLetterWords[i]);
-}
+// for (let i = 0; i < correctLetterWords.length; i++) {
+//   console.log(correctLetterWords[i]);
+// }
 
 alert();
 
@@ -114,26 +121,35 @@ alert();
 for (let i = 0; i < correctLetterWords.length; i++) {
   let testerWordHashMap = createHashmaps(correctLetterWords[i]);
   let validLetterCount = true;
+  console.log("Current word: " + correctLetterWords[i]);
   for (let j = 0; j < letterList.length; j++) {
     //check to make sure each letter is less than or equal to in number than that of the main word hashmap
+    console.log("working on letter: " + letterList[j]);
+    console.log("Main word: has letter?" + mainWordHashMap.get(letterList[j]));
+    console.log("Tester word as letter" + testerWordHashMap.get(letterList[j]));
     if (
-      mainWordHashMap.get(letterList[j]) <= testerWordHashMap.get(letterList[j])
+      mainWordHashMap.get(letterList[j]) >=
+        testerWordHashMap.get(letterList[j]) ||
+      testerWordHashMap.get(letterList[j]) == undefined
     ) {
       //Do noting
     } else {
+      console.log("=====ERROR=====");
       //Change boolean to false
       validLetterCount = false;
       break;
     }
   }
-  if ((validLetterCount = true)) {
+  if (validLetterCount == true) {
     finalWordList.push(correctLetterWords[i]);
   }
 }
 
+console.log("correct letter words: " + correctLetterWords.length);
+console.log("Final word list: " + finalWordList.length);
+alert();
 //Game Processing
 
-finalWordList.push("clark");
 //finalWordList.push("cat");
 //finalWordList.push("fish");
 
